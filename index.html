@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Barebone Mobile Menu</title>
+<meta name="description" content="Barebone Mobile Menu">
+
+<!-- CSS -->
+
+<style type="text/css">
+.animated {animation-duration: 300ms ;animation-fill-mode: both;}
+@keyframes slideInRight {from {transform: translate3d(100%, 0, 0);visibility: visible;} to {transform: translate3d(0, 0, 0);}}
+.slideInRight {animation-name: slideInRight;}
+@keyframes slideOutRight {from {transform: translate3d(0, 0, 0);} to {visibility: hidden;transform: translate3d(100%, 0, 0);}}
+.slideOutRight {animation-name: slideOutRight;}
+@keyframes fadeOut {from {opacity: 1;}to {opacity: 0;}}
+.fadeOut {animation-name: fadeOut;}
+#slideme {
+	width: 300px;
+	float: right;
+	height: 100%;
+	background: red;
+	position: relative;
+	z-index: 100;
+}
+#fade {
+	position: absolute;
+	top: 0;
+	z-index: 80;
+	width: 100%;
+	height: 100%;
+	background: rgba(255, 255, 255, 0.5)
+}
+.hide {
+	display: none;
+}
+body {
+	overflow-x: hidden;
+	margin: 0;
+	padding: 0;
+}
+button {
+	background: #6b15a1;
+	font-size: 32px;
+	border: solid 1px white;
+	width: 50px;
+	height: 50px;
+	border-radius: 100%;
+	color: white;
+}
+	</style>
+	
+	
+</head>
+<body>
+
+<!-- HTML -->
+	
+<button id="open_menu" >&#9776; </button>
+<div id="fade" class="animated hide">
+<div id="slideme" class="animated hide slideOutRight">
+	<button id="close_menu" >&#10005; </button>
+</div>
+</div>
+
+<!-- JAVASCRIPT -->
+
+<script type="text/javascript">
+document.getElementById('open_menu').addEventListener('click', function () {
+	document.getElementById("fade").classList.remove("hide", "fadeOut");
+	document.getElementById("slideme").classList.remove("hide", "slideOutRight");
+	document.getElementById("slideme").classList.add("slideInRight");
+ });
+document.getElementById('close_menu').addEventListener('click', function () {
+	document.getElementById("slideme").classList.remove("slideInRight");
+	document.getElementById("slideme").classList.add("slideOutRight");
+	document.getElementById("fade").classList.add("fadeOut");
+	setTimeout(function(){
+	document.getElementById("fade").classList.add("hide");
+	}, 600);
+ });
+</script>
+</body>
+</html>
